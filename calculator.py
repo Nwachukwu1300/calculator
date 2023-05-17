@@ -15,6 +15,12 @@ def button_click(number):
 
 def button_clear():
     e.delete(0,END)
+    
+def button_back():
+    current = e.get()
+    if current:
+        e.delete(len(current) - 1)
+
 
 
 def button_add():
@@ -83,32 +89,34 @@ button_multiplication = Button(root, text="X", padx=40, pady=20, command=button_
 button_division = Button(root, text="/", padx=41, pady=20, command=button_divide)
 button_equalto = Button(root, text="=", padx=91, pady=20, command=button_equal)
 button_clearpage = Button(root, text="CLEAR", padx=79, pady=20, command=button_clear)
+button_backspace = Button(root, text="⌫", padx=40, pady=20, command=button_back)
+
 
 
 #put buttons on screen
-button_1.grid(row=3,column=0)
-button_2.grid(row=3,column=1)
-button_3.grid(row=3,column=2)
+button_1.grid(row=2, column=0, padx=10, pady=10)
+button_2.grid(row=2, column=1, padx=10, pady=10)
+button_3.grid(row=2, column=2, padx=10, pady=10)
 
-button_4.grid(row=2,column=0)
-button_5.grid(row=2,column=1)
-button_6.grid(row=2,column=2)
+button_4.grid(row=3, column=0, padx=10, pady=10)
+button_5.grid(row=3, column=1, padx=10, pady=10)
+button_6.grid(row=3, column=2, padx=10, pady=10)
 
-button_7.grid(row=1,column=0)
-button_8.grid(row=1,column=1)
-button_9.grid(row=1,column=2)
+button_7.grid(row=4, column=0, padx=10, pady=10)
+button_8.grid(row=4, column=1, padx=10, pady=10)
+button_9.grid(row=4, column=2, padx=10, pady=10)
 
-button_0.grid(row=4,column=0)
-button_addition.grid(row=5, column=0)
-button_equalto.grid(row=5, column=1,columnspan=2)
-button_clearpage.grid(row=4, column=1,columnspan=2)
+button_0.grid(row=5, column=0, padx=10, pady=10)
+button_addition.grid(row=2, column=3, padx=10, pady=10)
+button_subtraction.grid(row=3, column=3, padx=10, pady=10)
+button_multiplication.grid(row=4, column=3, padx=10, pady=10)
+button_division.grid(row=5, column=3, padx=10, pady=10)
 
-button_subtraction.grid(row=6, column=1)
-button_multiplication.grid(row=6, column=2)
-button_division.grid(row=6, column=0)
+button_clearpage.grid(row=5, column=1, padx=10, pady=10)
+button_backspace.grid(row=5, column=2, padx=10, pady=10)
+button_equalto.grid(row=6, column=0, columnspan=4, padx=10, pady=10)
 
 
 
 root.mainloop()
-
 
