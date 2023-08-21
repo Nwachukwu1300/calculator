@@ -1,17 +1,16 @@
 from tkinter import *
 
-root = Tk()
-root.title("Mmesoma's Calculator")
-
-e = Entry(root, width=40,borderwidth=6)
-e.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
 
 def button_click(number):
     #e.delete(0,END)
     current = e.get()
     e.delete(0,END)
     e.insert(0,str(current) + str(number))
-
+    
+def button_dec():
+    current = e.get()
+    if "." not in current:
+        e.insert(END,".")
 
 def button_clear():
     e.delete(0,END)
@@ -21,28 +20,38 @@ def button_back():
     if current:
         e.delete(len(current) - 1)
 
-
-
 def button_add():
     first_num = e.get()
     global f_num
     global math 
     math = "addition"
-    f_num = int(first_num)
+    if "." in first_num:
+        f_num = float(first_num)
+    else:
+        f_num = int(first_num)
     e.delete(0,END)
     
 
 def button_equal():
-    second_num = e.get()
-    e.delete(0,END)
-    if math == "addition":
-        e.insert(0, f_num + int(second_num))
-    if math == "subtraction":
-        e.insert(0, f_num - int(second_num))
-    if math == "multiply":
-        e.insert(0, f_num * int(second_num))
-    if math == "divide":
-        e.insert(0, f_num / int(second_num))
+    try:
+        second_num = e.get()
+        e.delete(0, END)
+        if "." in second_num:
+            second_num = float(second_num)
+        else:
+            second_num = int(second_num)
+        if math == "addition":
+            e.insert(0, f_num + second_num)
+        if math == "subtraction":
+            e.insert(0, f_num - second_num)
+        if math == "multiply":
+            e.insert(0, f_num * second_num)
+        if math == "divide":
+            e.insert(0, f_num / second_num)
+    except Exception as math_error:
+        e.delete(0,END)
+        e.insert(0,"MATH ERROR")
+        
 
 
 def button_sub():
@@ -50,7 +59,10 @@ def button_sub():
     global f_num
     global math 
     math = "subtraction"
-    f_num = int(first_num)
+    if "." in first_num:
+        f_num = float(first_num)
+    else:
+        f_num = int(first_num)
     e.delete(0,END)
 
 
@@ -59,7 +71,10 @@ def button_multiply():
     global f_num
     global math 
     math = "multiply"
-    f_num = int(first_num)
+    if "." in first_num:
+        f_num = float(first_num)
+    else:
+        f_num = int(first_num)
     e.delete(0,END)
 
 
@@ -68,8 +83,17 @@ def button_divide():
     global f_num
     global math 
     math = "divide"
-    f_num = int(first_num)
+    if "." in first_num:
+        f_num = float(first_num)
+    else:
+        f_num = int(first_num)
     e.delete(0,END)
+
+root = Tk()
+root.title("Mmesoma's Calculator")
+
+e = Entry(root, width=40,borderwidth=6)
+e.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
 
 
 #define buttons
@@ -90,6 +114,7 @@ button_division = Button(root, text="/", padx=41, pady=20, command=button_divide
 button_equalto = Button(root, text="=", padx=91, pady=20, command=button_equal)
 button_clearpage = Button(root, text="CLEAR", padx=79, pady=20, command=button_clear)
 button_backspace = Button(root, text="⌫", padx=40, pady=20, command=button_back)
+button_decimal = Button(root, text=".", padx=40, pady=20, command=button_dec)
 
 
 
@@ -115,8 +140,9 @@ button_division.grid(row=5, column=3, padx=10, pady=10)
 button_clearpage.grid(row=5, column=1, padx=10, pady=10)
 button_backspace.grid(row=5, column=2, padx=10, pady=10)
 button_equalto.grid(row=6, column=0, columnspan=4, padx=10, pady=10)
+button_decimal.grid(row=6, column=1, padx=10, pady=10)
+
 
 
 
 root.mainloop()
-
